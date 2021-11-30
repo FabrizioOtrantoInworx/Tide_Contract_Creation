@@ -26,4 +26,4 @@ clicks(driver, "btn_createContract_addFolder")
 wait_generic(driver, "k-6fee9b7b-1713-441c-9d55-18b0e58ec1a0")
 clicks(driver, "k-6fee9b7b-1713-441c-9d55-18b0e58ec1a0")
 
-print("changing text to add into the 'cloud' branch!")
+print("changi   ng text to add into the 'cloud' branch!")
