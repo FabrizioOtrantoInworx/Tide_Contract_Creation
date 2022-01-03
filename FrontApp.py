@@ -64,6 +64,7 @@ class FrontApp:
     def SendJson(self):
         testSendJson = TestSendJson()
         testSendJson.RegresionSendJson()
+        print("Test have been run successfully")
 
 
     def SetNewAppConfig(self):
