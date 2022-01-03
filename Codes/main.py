@@ -6,6 +6,7 @@ from Class_Methods import sendkeys_and_click, clicks, select_dropdown, wait_gene
 driver = webdriver.Chrome(executable_path='C:/Desarrollo/Python Scripts/Tide_Contract_Creation/Drivers/chromedriver.exe')
 urlpath = "https://lt-d-tde-01-wa-01.azurewebsites.net/topmenu/contractlist"
 driver.get(urlpath)
+driver.get(urlpath)
 
 wait_generic(driver, "idSIButton9")
 sendkeys_and_click(driver, "i0116", "DUP.Insurer1@ctplc.com", "idSIButton9")
