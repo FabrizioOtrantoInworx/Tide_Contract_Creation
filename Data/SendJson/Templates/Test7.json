@@ -326,12 +326,12 @@
     "ContractRelationships": [],
     "CreationDate": "2021-09-20T13:03:25.000Z",
     "VersionCreatedDate": "2021-09-20T13:03:25.000Z",
-    "VersionUpdatedDate": "2022-01-03T15:09:22.000Z",
+    "VersionUpdatedDate": "2022-01-03T16:07:51.000Z",
     "LloydsDirectReporting": false,
     "ContractStatus": {
         "ContractStatusName": "Active"
     },
-    "LloydsContractRef": "sourceSystemReference42163611849",
+    "LloydsContractRef": "LCRAlreadyExisting",
     "ContractCurrency": {
         "ISOCurrencyAlphaCode": "GBP",
         "ISOCurrencyNumericCode": "826"
@@ -379,5 +379,5 @@
     "ContractType": {
         "ContractTypeName": "Binding Authority Agreement"
     },
-    "UMR": "TestOchoumrcode262943"
+    "UMR": "UMRAlreadyExisting"
 }

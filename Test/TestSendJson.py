@@ -9,11 +9,13 @@ class TestSendJson(IsolatedAsyncioTestCase):
         
     def RegresionSendJson(self): 
         
-        self.TestPastVersionUpadte()
-        self.TestFutureVersionUpadte()
-        self.TestVersionUpdateDateEqualCurrentDataTime()
-        self.Test6()
-        self.Test8()
+        # self.TestPastVersionUpadte()
+        # self.TestFutureVersionUpadte()
+        # self.TestVersionUpdateDateEqualCurrentDataTime()
+        # self.Test6()
+        self.Test7()
+        # self.Test8()
+        
 
     def TestPastVersionUpadte(self):
         t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/PastVersionUpdateTemplate.json')
@@ -33,7 +35,6 @@ class TestSendJson(IsolatedAsyncioTestCase):
         self.assertEqual(r.status_code, 400, 'Bad request was not the reason')
         self.assertEqual(r.reason,'Bad Request', "Bad request was not the reason")
         self.assertIn(UpdateVersionTimeCutted, r.text, "Update version time is not in the response text")        
-
 
     def TestFutureVersionUpadte(self):
         t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/FutureVersionUpdateTemplate.json')
@@ -92,6 +93,26 @@ class TestSendJson(IsolatedAsyncioTestCase):
         r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test6.json', 'rb')},headers=headers) 
         self.assertEqual(r.status_code, 200, 'contract has not been created')
         self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test6.json was successfully uploaded", r.text,"contract has not been created")
+
+    def Test7(self):
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test7.json')
+        dataTemplate = json.load(t)
+        dataTemplate['LloydsContractRef'] = "LCRAlreadyExisting"
+        dataTemplate['UMR'] = "UMRAlreadyExisting"
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test7.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test7.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 400, 'contract has not been created')
+        self.assertEqual(r.reason,'Bad Request', "contract has not been created")
         self.assertIn("Test6.json was successfully uploaded", r.text,"contract has not been created")
 
     def Test8(self):
