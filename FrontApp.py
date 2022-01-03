@@ -63,7 +63,7 @@ class FrontApp:
 
     def SendJson(self):
         testSendJson = TestSendJson()
-        testSendJson.sendJson()
+        testSendJson.RegresionSendJson()
 
 
     def SetNewAppConfig(self):
