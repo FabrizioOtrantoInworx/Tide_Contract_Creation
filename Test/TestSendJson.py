@@ -9,31 +9,30 @@ class TestSendJson(IsolatedAsyncioTestCase):
         
     def RegresionSendJson(self): 
         
-        # self.TestPastVersionUpadte() #Works
-        # self.TestFutureVersionUpadte() #Works
-        # self.TestVersionUpdateDateEqualCurrentDataTime() #works
-        # self.Test4NoUMR() #works
-        # self.Test5NoLCR() #works
-        # self.Test6() #does not work
-        # self.Test7() 
-        # self.Test8() #works
-        # self.Test9() #works
-        # self.Test10() #works
-        # self.Test11() #does not works
-        # self.Test12() #does not works
-        # self.Test13() #does not works
-        # self.Test15() #works
+        self.TestPastVersionUpadte() #Works
+        self.TestFutureVersionUpadte() #Works
+        self.TestVersionUpdateDateEqualCurrentDataTime() #works
+        self.Test4NoUMR() #works
+        self.Test5NoLCR() #works
+        self.Test6() #does not work
+        self.Test7() #does not work
+        self.Test8() #works
+        self.Test9() #works
+        self.Test10() #works
+        self.Test11() #does not works
+        self.Test12() #does not works
+        self.Test13() #does not works / Llega a tide pero no cambia la moneda
+        self.Test15() #works
         self.Test16() #works
-        # self.Test17() #works
-        # self.Test18() #does not works
-        # self.Test19() #works
+        self.Test17() #works
+        self.Test18() #does not works  / no llega a Tide
+        self.Test19() #works 
         
-
     def TestPastVersionUpadte(self):
         t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/PastVersionUpdateTemplate.json')
         dataTemplate = json.load(t)
         dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
-        dataTemplate['UMR'] = Utilidades.CreateUMR()
+        dataTemplate['UMR'] = Utilidades.CreateUMR("TestUno")
         UpdateVersionTime = dataTemplate['VersionUpdatedDate']
         UpdateVersionTimeCutted = UpdateVersionTime[0:19]
         data = json.dumps(dataTemplate)
@@ -52,7 +51,7 @@ class TestSendJson(IsolatedAsyncioTestCase):
         t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/FutureVersionUpdateTemplate.json')
         dataTemplate = json.load(t)
         dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
-        dataTemplate['UMR'] = Utilidades.CreateUMR()
+        dataTemplate['UMR'] = Utilidades.CreateUMR("TestDos")
         UpdateVersionTime = dataTemplate['VersionUpdatedDate']
         UpdateVersionTimeCutted = UpdateVersionTime[0:19]
         data = json.dumps(dataTemplate)
@@ -103,7 +102,7 @@ class TestSendJson(IsolatedAsyncioTestCase):
         headers = Properties.Header
         r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test4.json', 'rb')},headers=headers) 
         print (r)
-        self.assertEqual(r.status_code, 400, 'Contract has been created')
+        self.assertEqual(r.status_code, 200, 'Contract has not been created')
         self.assertEqual(r.reason,'OK', "Contract was not created")
         self.assertIn("Test4.json was successfully uploaded", r.text,"contract has not been created")
 
@@ -124,8 +123,8 @@ class TestSendJson(IsolatedAsyncioTestCase):
         headers = Properties.Header
         r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test5.json', 'rb')},headers=headers) 
         print (r)
-        self.assertEqual(r.status_code, 400, 'Contract has been created')
-        self.assertEqual(r.reason,'Bad Request', "Contract was created")
+        self.assertEqual(r.status_code, 200, 'Contract has not been created')
+        self.assertEqual(r.reason,'OK', "Contract was not created")
         self.assertIn("Test5.json was successfully uploaded", r.text,"contract has not been created")
 
     def Test6(self):
@@ -164,9 +163,9 @@ class TestSendJson(IsolatedAsyncioTestCase):
         url = Properties.Url
         headers = Properties.Header
         r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test7.json', 'rb')},headers=headers) 
-        self.assertEqual(r.status_code, 400, 'contract has not been created')
-        self.assertEqual(r.reason,'Bad Request', "contract has not been created")
-        self.assertIn("Test6.json was successfully uploaded", r.text,"contract has not been created")
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test7.json was successfully uploaded", r.text,"contract has not been created")
 
     def Test8(self):
         now = datetime.datetime.now()
@@ -286,7 +285,7 @@ class TestSendJson(IsolatedAsyncioTestCase):
         self.assertEqual(r.status_code, 200, 'contract has not been created')
         self.assertEqual(r.reason,'OK', "contract has not been created")
         self.assertIn("Test13.json was successfully uploaded", r.text,"contract has not been created")
-        
+
     def Test15(self):
         now = datetime.datetime.now()
         NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
@@ -353,7 +352,9 @@ class TestSendJson(IsolatedAsyncioTestCase):
         t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test18.json')
         dataTemplate = json.load(t)
         dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
-        dataTemplate['UMR'] = Utilidades.CreateUMR("TestDieciocho")
+        umr = Utilidades.CreateUMR("TestDieciocho")
+        dataTemplate['UMR'] = umr
+        print(umr)
         dataTemplate['VersionUpdatedDate'] = NVUD
         data = json.dumps(dataTemplate)
         writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test18.json','w')
