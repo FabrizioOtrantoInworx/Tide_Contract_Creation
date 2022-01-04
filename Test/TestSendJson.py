@@ -9,17 +9,24 @@ class TestSendJson(IsolatedAsyncioTestCase):
         
     def RegresionSendJson(self): 
         
-        # self.TestPastVersionUpadte()
-        # self.TestFutureVersionUpadte()
-        # self.TestVersionUpdateDateEqualCurrentDataTime()
-        # self.Test4NoUMR()
-        # self.Test5NoLCR()
-        # self.Test6()
-        # self.Test7()
-        # self.Test8()
-        # self.Test9()
-        # self.Test10()
-        self.Test11()
+        # self.TestPastVersionUpadte() #Works
+        # self.TestFutureVersionUpadte() #Works
+        # self.TestVersionUpdateDateEqualCurrentDataTime() #works
+        # self.Test4NoUMR() #works
+        # self.Test5NoLCR() #works
+        # self.Test6() #does not work
+        # self.Test7() 
+        # self.Test8() #works
+        # self.Test9() #works
+        # self.Test10() #works
+        # self.Test11() #does not works
+        # self.Test12() #does not works
+        # self.Test13() #does not works
+        # self.Test15() #works
+        self.Test16() #works
+        # self.Test17() #works
+        # self.Test18() #does not works
+        # self.Test19() #works
         
 
     def TestPastVersionUpadte(self):
@@ -240,3 +247,143 @@ class TestSendJson(IsolatedAsyncioTestCase):
         self.assertEqual(r.status_code, 200, 'contract has not been created')
         self.assertEqual(r.reason,'OK', "contract has not been created")
         self.assertIn("Test11.json was successfully uploaded", r.text,"contract has not been created")
+
+    def Test12(self):
+
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test12.json')
+        dataTemplate = json.load(t)
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test12.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test12.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test12.json was successfully uploaded", r.text,"contract has not been created")
+  
+    def Test13(self):
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test13.json')
+        dataTemplate = json.load(t)
+        dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
+        dataTemplate['UMR'] = Utilidades.CreateUMR("TestTrece")
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test13.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test13.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test13.json was successfully uploaded", r.text,"contract has not been created")
+        
+    def Test15(self):
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test15.json')
+        dataTemplate = json.load(t)
+        dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
+        dataTemplate['UMR'] = Utilidades.CreateUMR("TestQuince")
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test15.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test15.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test15.json was successfully uploaded", r.text,"contract has not been created")
+    
+    def Test16(self):
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test16.json')
+        dataTemplate = json.load(t)
+        dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
+        dataTemplate['UMR'] = Utilidades.CreateUMR("TestDieciseis")
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test16.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test16.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test16.json was successfully uploaded", r.text,"contract has not been created")
+
+    def Test17(self):
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test17.json')
+        dataTemplate = json.load(t)
+        dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
+        dataTemplate['UMR'] = Utilidades.CreateUMR("TestDiecisiete")
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test17.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test17.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test17.json was successfully uploaded", r.text,"contract has not been created")
+
+    def Test18(self):
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test18.json')
+        dataTemplate = json.load(t)
+        dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
+        dataTemplate['UMR'] = Utilidades.CreateUMR("TestDieciocho")
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test18.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test18.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test18.json was successfully uploaded", r.text,"contract has not been created")
+
+    def Test19(self):
+        now = datetime.datetime.now()
+        NVUD = now.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+        t = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test19.json')
+        dataTemplate = json.load(t)
+        umrAndLcr = Utilidades.CreateUMR("TestDiecinueve")
+        dataTemplate['LloydsContractRef'] = umrAndLcr
+        dataTemplate['UMR'] = umrAndLcr
+        dataTemplate['VersionUpdatedDate'] = NVUD
+        data = json.dumps(dataTemplate)
+        writableFile = open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test19.json','w')
+        writableFile.write(data)
+        writableFile.close()
+        t.close()
+        url = Properties.Url
+        headers = Properties.Header
+        r =  requests.post(url, files={'file': open('C:/PythonAutomation/Scripts/Data/SendJson/Templates/Test19.json', 'rb')},headers=headers) 
+        self.assertEqual(r.status_code, 200, 'contract has not been created')
+        self.assertEqual(r.reason,'OK', "contract has not been created")
+        self.assertIn("Test19.json was successfully uploaded", r.text,"contract has not been created")
