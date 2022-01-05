@@ -16,18 +16,17 @@ class ContratApiLogPage(Base):
         Espera.wait_for_element_to_be_located(self.driver, umrFilterBtn )
         self.click(umrFilterBtn)
 
-    def writeUMR(self):
+    def ClickSSRFilterBtn(self,):
+        ssrFilterBtn = (By.ID,"filterIcnsourceSystemReference")
+        Espera.wait_for_element_to_be_located(self.driver, ssrFilterBtn )
+        self.click(ssrFilterBtn)
+
+    def writeinSearchField(self, umr):
         searchField = (By.ID,"lbl_search")
-        t= open ("C:/PythonAutomation/Scripts/Jsons/template.json")
-        dataTemplate = json.load(t)
-        UMR = dataTemplate["UMR"]
-        self.sendkeys(searchField, UMR)
+        self.sendkeys(searchField, umr)
         
-    def ClickCheckBtn(self):
-        t= open ("C:/PythonAutomation/Scripts/Jsons/template.json")
-        dataTemplate = json.load(t)
-        UMR = dataTemplate["UMR"]
-        checkbtnID = "chk_" + UMR + "_0"
+    def ClickCheckBtn(self, umr):
+        checkbtnID = "chk_" + umr + "_0"
         checkBtn = (By.ID, checkbtnID)
         self.click(checkBtn)
 
@@ -44,14 +43,18 @@ class ContratApiLogPage(Base):
         okBtn = (By.ID,"btn_ok")
         self.click(okBtn)
 
-    def assertErrors(self):
+    def readErrors(self, errorNumber):
         Espera.wait_mask_loading(self.driver)
         errors = self.driver.find_elements(By.XPATH,"//span[@class='error-note-desc-red toolTip-text ng-star-inserted']")
-        error = errors[0].text
-        if(error == "[Broker] supplied cannot be matched to a valid Tide [Company/Division]."):
-            print("pass")
-        else:
-            print("failed")
+        return errors[errorNumber].text
+        
+        
+    def readStatus(self):
+        Espera.wait_mask_loading(self.driver)
+        statusSpan = (By.XPATH,"//*[@id='span_errorStatus_0']/span")
+        return self.readText(statusSpan)
+         
+
 
 
 
