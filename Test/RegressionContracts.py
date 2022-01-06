@@ -29,19 +29,17 @@ def test_RegressionContratApiLogTestVersionUpdateDateEqualCurrentDataTime(setup)
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.wait_until_contract_is_Load_into_tide(umr)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         assert contratApiLogPage.readStatus() =="-"
-        homePage.Navbar.ClickTideLogo()
+        
 
 
 def test_RegressionContratApiLogTestContractWihoutUMR(setup):
         t = open('./Data/SendJson/Templates/ContractWihoutUMRTemplate.json')
         dataTemplate = json.load (t)
-        ssr = dataTemplate['LloydsContractRef']
+        lcr = dataTemplate['LloydsContractRef']
         t.close()
         homePage = HomePage(driver)
         homePage.Navbar.ClickContractLink()
@@ -50,14 +48,13 @@ def test_RegressionContratApiLogTestContractWihoutUMR(setup):
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickSSRFilterBtn()
-        contratApiLogPage.writeinSearchField(ssr)
-        contratApiLogPage.ClickCheckBtn(ssr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Lcr(lcr)
+        contratApiLogPage.ClickCheckBtn(lcr)
         contratApiLogPage.ClickFilterBtn()
         contratApiLogPage.ClickReviewErrorsBtn()
-        assert contratApiLogPage.readErrors(0) == f"E004: UMR missing from contract; CONTRACTUMRISEMPTY; Contract with LloydsContractRef {ssr} does not have a valid UMR"
+        assert contratApiLogPage.readErrors(0) == f"E004: UMR missing from contract; CONTRACTUMRISEMPTY; Contract with LloydsContractRef {lcr} does not have a valid UMR"
         contratApiLogPage.ClickOkBtn()
-        homePage.Navbar.ClickTideLogo()
+        
 
 def test_RegressionContratApiLogTestContractWihoutLCR(setup):
         t = open('./Data/SendJson/Templates/ContractWihoutLCRTemplate.json')
@@ -71,14 +68,13 @@ def test_RegressionContratApiLogTestContractWihoutLCR(setup):
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         contratApiLogPage.ClickReviewErrorsBtn()
         assert contratApiLogPage.readErrors(0) == f"E003: LloydsContractRef missing from contract; CONTRACTLLOYDSCONTRACTREFISEMPTY; Contract with UMR {umr} does not have a valid Lloyds Contract Ref"
         contratApiLogPage.ClickOkBtn()
-        homePage.Navbar.ClickTideLogo()
+        
 
 def test_RegressionContratApiLogTestContractStatusNameAndContractTypeName(setup):
         t = open('./Data/SendJson/Templates/ContractStatusNameAndContractTypeNameTemplate.json')
@@ -92,12 +88,11 @@ def test_RegressionContratApiLogTestContractStatusNameAndContractTypeName(setup)
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         assert contratApiLogPage.readStatus() =="-"
-        homePage.Navbar.ClickTideLogo()
+        
 
 
 def test_RegressionContratApiLogTestContractTypeNameAndMigratedFlagMissing(setup):
@@ -112,12 +107,11 @@ def test_RegressionContratApiLogTestContractTypeNameAndMigratedFlagMissing(setup
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         assert contratApiLogPage.readStatus() =="-"
-        homePage.Navbar.ClickTideLogo()
+        
 
 def test_RegressionContratApiLogTestContractTypeNameAndMigratedFlagFalse(setup):
         t = open('./Data/SendJson/Templates/ContractTypeNameAndMigratedFlagFalseTemplate.json')
@@ -131,12 +125,11 @@ def test_RegressionContratApiLogTestContractTypeNameAndMigratedFlagFalse(setup):
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         assert contratApiLogPage.readStatus() =="-"
-        homePage.Navbar.ClickTideLogo()
+        
 
 
 def test_RegressionContratApiLogTestContractWithoutContractCurrency(setup):
@@ -151,14 +144,13 @@ def test_RegressionContratApiLogTestContractWithoutContractCurrency(setup):
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         contratApiLogPage.ClickReviewErrorsBtn()
         assert contratApiLogPage.readErrors(0) == "L003: Invalid DCOM Contract; Unable to load contract into TIDE."
         contratApiLogPage.ClickOkBtn()
-        homePage.Navbar.ClickTideLogo()
+        
 
 def test_RegressionContratApiLogTestContractStatusNameEqualRegistered(setup):
 
@@ -173,12 +165,11 @@ def test_RegressionContratApiLogTestContractStatusNameEqualRegistered(setup):
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         assert contratApiLogPage.readStatus() =="-"
-        homePage.Navbar.ClickTideLogo()
+        
 
 
 
@@ -194,12 +185,11 @@ def test_RegressionContratApiLogTestMigratedFlagTrueAndIsMigratedDraftTrue(setup
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         assert contratApiLogPage.readStatus() =="-"
-        homePage.Navbar.ClickTideLogo()
+        
 
 def test_RegressionContratApiLogTestContractWithSameUmrAndLcr(setup):
         t = open('./Data/SendJson/Templates/ContractWithSameUmrAndLcrTemplate.json')
@@ -213,12 +203,11 @@ def test_RegressionContratApiLogTestContractWithSameUmrAndLcr(setup):
         contractPage.ClickContractApiLogBtn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.ClickUMRFilterBtn()
-        contratApiLogPage.writeinSearchField(umr)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide_With_Umr(umr)
         contratApiLogPage.ClickCheckBtn(umr)
         contratApiLogPage.ClickFilterBtn()
         assert contratApiLogPage.readStatus() =="-"
-        homePage.Navbar.ClickTideLogo()
+        
 
 
 

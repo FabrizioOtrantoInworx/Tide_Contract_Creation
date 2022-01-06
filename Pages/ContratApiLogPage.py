@@ -1,3 +1,4 @@
+from tkinter.constants import E
 from selenium.webdriver.common.by import By
 from Core.Espera import Espera
 from Core.Base import Base
@@ -56,7 +57,7 @@ class ContratApiLogPage(Base):
          
 
        
-    def wait_until_contract_is_Load_into_tide(self, umr):
+    def wait_until_contract_is_Loaded_into_tide_With_Umr(self, umr):
         self.ClickUMRFilterBtn()
         self.writeinSearchField(umr)
         Espera.wait_seconds(6)
@@ -71,7 +72,29 @@ class ContratApiLogPage(Base):
             Espera.wait_seconds(6)
             self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_uniqueMarketReference']/div[2]").text
             self.contador = self.contador + 1
-            if self.noDataFoundElement == "0 items selected" or self.contador == 60:
+            if self.noDataFoundElement == "0 items selected" or self.contador == 80:
+                Espera.wait_mask_loading(self.driver)
+                Espera.wait_seconds(2)
+                break
+
+    def wait_until_contract_is_Loaded_into_tide_With_Lcr(self, lcr):
+        self.ClickSSRFilterBtn()
+        self.writeinSearchField(lcr)
+        Espera.wait_seconds(6)
+        self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_sourceSystemReference']/div[2]").text
+        print(self.noDataFoundElement)
+        self.contador = 0
+        while self.noDataFoundElement == "No Data Found":
+            self.driver.refresh()
+            Espera.wait_mask_loading(self.driver)
+            self.ClickSSRFilterBtn()
+            self.writeinSearchField(lcr)
+            Espera.wait_seconds(6)
+            self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_sourceSystemReference']/div[2]").text
+            self.contador = self.contador + 1
+            if self.noDataFoundElement == "0 items selected" or self.contador == 80:
+                Espera.wait_mask_loading(self.driver)
+                Espera.wait_seconds(2)
                 break
             
 
