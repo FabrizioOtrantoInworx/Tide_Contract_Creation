@@ -1,6 +1,3 @@
-
-from Test.RegressionContracts import RegressionContracts
-from Test.TestSendJson import TestSendJson
 import tkinter as tk
 from tkinter import ttk
 import json
@@ -17,7 +14,6 @@ class FrontApp:
         self.root.geometry(geometry)
         self.root.grid_columnconfigure(2, minsize=40)
 
-   
         self.usernameLabel = tk.Label(self.root, text="Username", padx=20, pady=5)
         self.usernameLabel.grid(row=1, column=1)
         self.usernameInput = tk.Entry(self.root)
@@ -48,27 +44,14 @@ class FrontApp:
         self.urlInput.grid(row=5, column=3)
 
 
-        self.regresionContractBtn = tk.Button(self.root, text="Contract Regresion", command = self.regressionContracts, width=15, height=1)
-        self.regresionContractBtn.grid(row=7,column=3)
-        self.sendJsonBtn = tk.Button(self.root, text="Send Json", command = self.SendJson, width=15, height=1)
-        self.sendJsonBtn.grid(row=8, column=3)
         self.setChanges = tk.Button(self.root, text="Set Changes", command = self.SetNewAppConfig, width=15, height=1)
         self.setChanges.grid(row=6, column=3)
 
         self.root.mainloop()
 
-    def regressionContracts(self):
-        regresionContracts = RegressionContracts()
-        regresionContracts.RegressionContracts()
-
-    def SendJson(self):
-        testSendJson = TestSendJson()
-        testSendJson.RegresionSendJson()
-        print("Tests have been run successfully")
-
 
     def SetNewAppConfig(self):
-        appConfigData= open ("C:/PythonAutomation/Scripts/Data/Appconfig.json")
+        appConfigData= open ("./Data/Appconfig.json")
         appConfig = json.load(appConfigData)
         username = self.usernameInput.get()
         password = self.passwordInput.get()
@@ -81,7 +64,7 @@ class FrontApp:
         appConfig["rutaDriver"] = driverRoute
         appConfig["url"] = url
         appConfig = json.dumps(appConfig)
-        writableFile = open('C:/PythonAutomation/Scripts/Data/Appconfig.json','w')
+        writableFile = open('./Data/Appconfig.json','w')
         writableFile.write(appConfig)
         writableFile.close()
         appConfigData.close()

@@ -55,6 +55,26 @@ class ContratApiLogPage(Base):
         return self.readText(statusSpan)
          
 
+       
+    def wait_until_contract_is_Load_into_tide(self, umr):
+        self.ClickUMRFilterBtn()
+        self.writeinSearchField(umr)
+        Espera.wait_seconds(6)
+        self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_uniqueMarketReference']/div[2]").text
+        print(self.noDataFoundElement)
+        self.contador = 0
+        while self.noDataFoundElement == "No Data Found":
+            self.driver.refresh()
+            Espera.wait_mask_loading(self.driver)
+            self.ClickUMRFilterBtn()
+            self.writeinSearchField(umr)
+            Espera.wait_seconds(6)
+            self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_uniqueMarketReference']/div[2]").text
+            self.contador = self.contador + 1
+            if self.noDataFoundElement == "0 items selected" or self.contador == 60:
+                break
+            
+
 
 
 

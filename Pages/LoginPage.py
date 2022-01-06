@@ -31,3 +31,4 @@ class LoginPage(Base):
         self.ClickNext()
         self.ClickNext()
 
+
