@@ -4,10 +4,10 @@ from Core.Configuration import Configuration
 class WebDriver:
 
     @staticmethod
-    def Start_Driver():
-        browser = Configuration.setBrowser()
-        url = Configuration.setUrl()
-        rutaDriver = Configuration.setRutaDriver()
+    def start_driver():
+        browser = Configuration.set_browser()
+        url = Configuration.set_url()
+        rutaDriver = Configuration.set_ruta_driver()
 
         if(browser == "chrome"):
             driver = webdriver.Chrome(executable_path= rutaDriver + "chromedriver.exe")

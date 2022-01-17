@@ -8,16 +8,16 @@ class ContratApiLogPage(Base):
 
     def __init__(self, driver):
         super().__init__(driver)
-        Espera.wait_for_Url_To_Contain(self.driver, "contractsapilog")
+        Espera.wait_for_url_to_contain(self.driver, "contractsapilog")
         Espera.wait_mask_loading(self.driver)
 
 
-    def ClickUMRFilterBtn(self,):
+    def click_umr_filter_btn(self,):
         umrFilterBtn = (By.ID,"filterIcnuniqueMarketReference")
         Espera.wait_for_element_to_be_located(self.driver, umrFilterBtn )
         self.click(umrFilterBtn)
 
-    def ClickSSRFilterBtn(self,):
+    def click_ssr_filter_btn(self,):
         ssrFilterBtn = (By.ID,"filterIcnsourceSystemReference")
         Espera.wait_for_element_to_be_located(self.driver, ssrFilterBtn )
         self.click(ssrFilterBtn)
@@ -26,39 +26,39 @@ class ContratApiLogPage(Base):
         searchField = (By.ID,"lbl_search")
         self.sendkeys(searchField, umr)
         
-    def ClickCheckBtn(self, umr):
+    def click_check_btn(self, umr):
         checkbtnID = "chk_" + umr + "_0"
         checkBtn = (By.ID, checkbtnID)
         self.click(checkBtn)
 
-    def ClickFilterBtn(self):
+    def click_filter_btn(self):
         FilterButton = (By.XPATH,"//button[contains(text(),'Filter')]")
         self.click(FilterButton)
 
-    def ClickReviewErrorsBtn(self):
+    def click_review_errors_btn(self):
         Espera.wait_mask_loading(self.driver)
         reviewErrorsBtn = (By.XPATH,"//button[contains(text(),'REVIEW ERRORS')]")
         self.click(reviewErrorsBtn)
 
-    def ClickOkBtn(self):
+    def click_ok_btn(self):
         okBtn = (By.ID,"btn_ok")
         self.click(okBtn)
 
-    def readErrors(self, errorNumber):
+    def read_errors(self, errorNumber):
         Espera.wait_mask_loading(self.driver)
         errors = self.driver.find_elements(By.XPATH,"//span[@class='error-note-desc-red toolTip-text ng-star-inserted']")
         return errors[errorNumber].text
         
         
-    def readStatus(self):
+    def read_status(self):
         Espera.wait_mask_loading(self.driver)
         statusSpan = (By.XPATH,"//*[@id='span_errorStatus_0']/span")
-        return self.readText(statusSpan)
+        return self.read_text(statusSpan)
          
 
        
     def wait_until_contract_is_Loaded_into_tide_With_Umr(self, umr):
-        self.ClickUMRFilterBtn()
+        self.click_umr_filter_btn()
         self.writeinSearchField(umr)
         Espera.wait_seconds(6)
         self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_uniqueMarketReference']/div[2]").text
@@ -67,7 +67,7 @@ class ContratApiLogPage(Base):
         while self.noDataFoundElement == "No Data Found":
             self.driver.refresh()
             Espera.wait_mask_loading(self.driver)
-            self.ClickUMRFilterBtn()
+            self.click_umr_filter_btn()
             self.writeinSearchField(umr)
             Espera.wait_seconds(6)
             self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_uniqueMarketReference']/div[2]").text
@@ -78,7 +78,7 @@ class ContratApiLogPage(Base):
                 break
 
     def wait_until_contract_is_Loaded_into_tide_With_Lcr(self, lcr):
-        self.ClickSSRFilterBtn()
+        self.click_ssr_filter_btn()
         self.writeinSearchField(lcr)
         Espera.wait_seconds(6)
         self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_sourceSystemReference']/div[2]").text
@@ -87,7 +87,7 @@ class ContratApiLogPage(Base):
         while self.noDataFoundElement == "No Data Found":
             self.driver.refresh()
             Espera.wait_mask_loading(self.driver)
-            self.ClickSSRFilterBtn()
+            self.click_ssr_filter_btn()
             self.writeinSearchField(lcr)
             Espera.wait_seconds(6)
             self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_sourceSystemReference']/div[2]").text

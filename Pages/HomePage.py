@@ -5,7 +5,7 @@ from Core.Espera import Espera
 class HomePage(Base):
     def __init__(self, driver):
         super().__init__(driver)
-        Espera.wait_for_Url_To_Contain(driver, "home")
+        Espera.wait_for_url_to_contain(driver, "home")
         self.Navbar = NavBar(driver)
 
 

@@ -46,7 +46,8 @@ def test_FutureVersionUpadte():
 
 def test_VersionUpdateDateEqualCurrentDataTime():  
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/VersionUpdateDateEqualCurrentDataTimeTemplate.json')
     dataTemplate = json.load (t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -66,7 +67,8 @@ def test_VersionUpdateDateEqualCurrentDataTime():
 
 def test_ContractWihoutUMR():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractWihoutUMRTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -86,7 +88,8 @@ def test_ContractWihoutUMR():
 
 def test_ContractWihoutLCR():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')    
     t = open('./Data/SendJson/Templates/ContractWihoutLCRTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['UMR'] = Utilidades.CreateUMR("testCinco")
@@ -106,7 +109,8 @@ def test_ContractWihoutLCR():
 
 def test_ContractTypeNameWithoutContractSectionStatus():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractTypeNameWithoutContractSectionStatusTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -126,7 +130,8 @@ def test_ContractTypeNameWithoutContractSectionStatus():
 
 def test_RepeatedUmrAndLcr():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/RepeatedUmrAndLcrTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = "LCRAlreadyExisting"
@@ -146,7 +151,8 @@ def test_RepeatedUmrAndLcr():
 
 def test_ContractStatusNameAndContractTypeName():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractStatusNameAndContractTypeNameTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -166,7 +172,8 @@ def test_ContractStatusNameAndContractTypeName():
     
 def test_ContractTypeNameAndMigratedFlagMissing():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractTypeNameAndMigratedFlagMissingTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -186,7 +193,8 @@ def test_ContractTypeNameAndMigratedFlagMissing():
 
 def test_ContractTypeNameAndMigratedFlagFalse():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractTypeNameAndMigratedFlagFalseTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -206,7 +214,8 @@ def test_ContractTypeNameAndMigratedFlagFalse():
 
 def test_MigratedFlagTrueAndIsMigratedDraftFalse():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/MigratedFlagTrueAndIsMigratedDraftFalseTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -227,7 +236,8 @@ def test_MigratedFlagTrueAndIsMigratedDraftFalse():
 def test_UmrRepeatedWithExistingError():
 
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/UmrRepeatedWithExistingErrorTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['VersionUpdatedDate'] = NVUD
@@ -245,7 +255,8 @@ def test_UmrRepeatedWithExistingError():
 
 def test_InvalidCurrency():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/InvalidCurrencyTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -265,7 +276,8 @@ def test_InvalidCurrency():
 
 def test_ContractWithoutContractCurrency():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractWithoutContractCurrencyTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -285,7 +297,8 @@ def test_ContractWithoutContractCurrency():
 
 def test_ContractStatusNameEqualRegistered():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractStatusNameEqualRegisteredTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -305,7 +318,8 @@ def test_ContractStatusNameEqualRegistered():
 
 def test_MigratedFlagTrueAndIsMigratedDraftTrue():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/MigratedFlagTrueAndIsMigratedDraftTrueTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -325,7 +339,8 @@ def test_MigratedFlagTrueAndIsMigratedDraftTrue():
 
 def test_ContractWithoutContra2ctStatus():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractWithoutContra2ctStatusTemplate.json')
     dataTemplate = json.load(t)
     dataTemplate['LloydsContractRef'] = Utilidades.CreateSourceSystemReference()
@@ -346,7 +361,8 @@ def test_ContractWithoutContra2ctStatus():
 
 def test_ContractWithSameUmrAndLcr():
     utcnow = datetime.datetime.utcnow()
-    NVUD = utcnow.strftime('%Y-%m-%dT%H:%M:%S.000Z')
+    utc_now_fixed = utcnow - datetime.timedelta(seconds=10)
+    NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
     t = open('./Data/SendJson/Templates/ContractWithSameUmrAndLcrTemplate.json')
     dataTemplate = json.load(t)
     umrAndLcr = Utilidades.CreateUMR("TestDiecinueve")

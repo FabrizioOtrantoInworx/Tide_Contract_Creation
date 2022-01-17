@@ -44,13 +44,15 @@ class FrontApp:
         self.urlInput.grid(row=5, column=3)
 
 
-        self.setChanges = tk.Button(self.root, text="Set Changes", command = self.SetNewAppConfig, width=15, height=1)
+        self.setChanges = tk.Button(self.root, text="Set Changes", command = self.set_new_app_config, width=15, height=1)
         self.setChanges.grid(row=6, column=3)
+        self.stratTest = tk.Button(self.root, text="Start", command = self.root.destroy , width=15, height=1)
+        self.stratTest.grid(row=7, column=3)
 
         self.root.mainloop()
 
 
-    def SetNewAppConfig(self):
+    def set_new_app_config(self):
         appConfigData= open ("./Data/Appconfig.json")
         appConfig = json.load(appConfigData)
         username = self.usernameInput.get()

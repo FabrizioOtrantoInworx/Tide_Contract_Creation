@@ -13,7 +13,7 @@ class Espera:
             print("Timed out waiting for element to appear")
 
     @staticmethod
-    def wait_for_Url_To_Contain(driver, url):
+    def wait_for_url_to_contain(driver, url):
             try:
                 WebDriverWait(driver, 5).until(EC.url_contains(url))
             except TimeoutException:

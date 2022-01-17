@@ -7,11 +7,11 @@ class NavBar(Base):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def ClickContractLink(self):
+    def click_contract_link(self):
         Espera.wait_mask_loading(self.driver)
         contractLink = (By.ID,"a_Topnav_Contracts")
         self.click(contractLink)
 
-    def ClickTideLogo(self):
+    def click_tide_logo(self):
         tideLogoBtn = (By.ID,"TideLogo")
         self.click(tideLogoBtn)

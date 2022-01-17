@@ -7,28 +7,28 @@ class LoginPage(Base):
 
     def __init__(self, driver):
         super().__init__(driver)
-        Espera.wait_for_Url_To_Contain(driver,"microsoftonline")
+        Espera.wait_for_url_to_contain(driver,"microsoftonline")
 
-    def WriteEmail(self, email):
+    def write_email(self, email):
         emailField = (By.ID,"i0116")
         self.sendkeys(emailField, email)
 
-    def ClickNext(self):
+    def click_next(self):
         nextBtn = (By.ID,"idSIButton9")
         Espera.wait_seconds(2)
         self.click(nextBtn)
     
-    def WritePassword(self, password):
+    def write_password(self, password):
         passwordField = (By.ID, "i0118")
         self.sendkeys(passwordField, password)
 
-    def Login(self):
-        username = Configuration.setUsername()
-        self.WriteEmail(username) 
-        self.ClickNext()
-        password = Configuration.setPassword()
-        self.WritePassword(password)
-        self.ClickNext()
-        self.ClickNext()
+    def login(self):
+        username = Configuration.set_username()
+        self.write_email(username) 
+        self.click_next()
+        password = Configuration.set_password()
+        self.write_password(password)
+        self.click_next()
+        self.click_next()
 
 
