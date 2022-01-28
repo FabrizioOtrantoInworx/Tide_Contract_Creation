@@ -21,7 +21,7 @@ class WebDriver:
 
         driver.maximize_window()
         driver.get (url)
-        
+                
         return driver
 
 

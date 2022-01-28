@@ -8,21 +8,21 @@ class Espera:
     @staticmethod
     def wait_for_element_to_be_located(driver, locator):
         try:
-            WebDriverWait(driver, 5).until(EC.presence_of_element_located(locator))
+            WebDriverWait(driver, 30).until(EC.presence_of_element_located(locator),f"timeout has been exceeded then this {locator} could not be located")
         except TimeoutException:
             print("Timed out waiting for element to appear")
 
     @staticmethod
     def wait_for_url_to_contain(driver, url):
             try:
-                WebDriverWait(driver, 5).until(EC.url_contains(url))
+                WebDriverWait(driver, 30).until(EC.url_contains(url),f"timeout has been exceeded then url was different from {url}")
             except TimeoutException:
                 print("Timed out waiting for url to be")
 
     @staticmethod
     def wait_for_element_to_dissapear(driver, locator):
         try:
-            WebDriverWait(driver, 5).until(EC.invisibility_of_element(locator))
+            WebDriverWait(driver, 30).until(EC.invisibility_of_element(locator),f"timeout has been exceeded then this {locator} was still on screen")
         except TimeoutException:
             print("Timed out waiting for element to disappear")
 

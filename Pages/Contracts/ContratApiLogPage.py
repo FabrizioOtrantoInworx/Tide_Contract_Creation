@@ -1,8 +1,16 @@
+from ctypes import util
+from lib2to3.pgen2 import driver
 from tkinter.constants import E
 from selenium.webdriver.common.by import By
 from Core.Espera import Espera
 from Core.Base import Base
+from Core.Utilidades.Utilidades import Utilidades
+from Pages.Contracts.Enumerados.enum import Enum
 import json
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 
 class ContratApiLogPage(Base):
 
@@ -57,48 +65,30 @@ class ContratApiLogPage(Base):
          
 
        
-    def wait_until_contract_is_Loaded_into_tide_With_Umr(self, umr):
-        self.click_umr_filter_btn()
-        self.writeinSearchField(umr)
-        Espera.wait_seconds(6)
-        self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_uniqueMarketReference']/div[2]").text
-        print(self.noDataFoundElement)
-        self.contador = 0
-        while self.noDataFoundElement == "No Data Found":
-            self.driver.refresh()
-            Espera.wait_mask_loading(self.driver)
+    def wait_until_contract_is_Loaded_into_tide(self, id, search_by = Enum.UMR):
+        if search_by == Enum.UMR:
             self.click_umr_filter_btn()
-            self.writeinSearchField(umr)
-            Espera.wait_seconds(6)
-            self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_uniqueMarketReference']/div[2]").text
-            self.contador = self.contador + 1
-            if self.noDataFoundElement == "0 items selected" or self.contador == 80:
-                Espera.wait_mask_loading(self.driver)
-                Espera.wait_seconds(2)
-                break
-
-    def wait_until_contract_is_Loaded_into_tide_With_Lcr(self, lcr):
-        self.click_ssr_filter_btn()
-        self.writeinSearchField(lcr)
-        Espera.wait_seconds(6)
-        self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_sourceSystemReference']/div[2]").text
-        print(self.noDataFoundElement)
+        elif search_by == Enum.LCR:
+            self.click_ssr_filter_btn()       
+        self.writeinSearchField(id)
+        self.noDataFoundLocator = (By.XPATH,"//div[contains(text(),'No Data Found')]")
         self.contador = 0
-        while self.noDataFoundElement == "No Data Found":
+        utilidades = Utilidades(self.driver)
+        while utilidades.check_if_element_exist(self.noDataFoundLocator) == True:
             self.driver.refresh()
             Espera.wait_mask_loading(self.driver)
-            self.click_ssr_filter_btn()
-            self.writeinSearchField(lcr)
-            Espera.wait_seconds(6)
-            self.noDataFoundElement = self.driver.find_element(By.XPATH,"//multicheck-filter[@id='mdl_sourceSystemReference']/div[2]").text
+            Espera.wait_seconds(5)
+            if search_by == Enum.UMR:
+                self.click_umr_filter_btn()
+            elif search_by == Enum.LCR:
+                self.click_ssr_filter_btn()       
+            self.writeinSearchField(id)
+            self.noDataFoundLocator = (By.XPATH,"//div[contains(text(),'No Data Found')]")
             self.contador = self.contador + 1
-            if self.noDataFoundElement == "0 items selected" or self.contador == 80:
+            if self.contador == 50 or utilidades.check_if_element_exist(self.noDataFoundLocator) == False:
                 Espera.wait_mask_loading(self.driver)
-                Espera.wait_seconds(2)
+                #Espera.wait_seconds(15)
                 break
-            
-
-
 
 
 
