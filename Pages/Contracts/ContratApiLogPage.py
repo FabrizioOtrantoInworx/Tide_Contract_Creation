@@ -1,16 +1,10 @@
-from ctypes import util
-from lib2to3.pgen2 import driver
 from tkinter.constants import E
 from selenium.webdriver.common.by import By
 from Core.Espera import Espera
 from Core.Base import Base
 from Core.Utilidades.Utilidades import Utilidades
-from Pages.Contracts.Enumerados.enum import Enum
-import json
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import TimeoutException
+from Pages.Contracts.Enumerations.Identifiers import Identifiers
+
 
 class ContratApiLogPage(Base):
 
@@ -65,10 +59,10 @@ class ContratApiLogPage(Base):
          
 
        
-    def wait_until_contract_is_Loaded_into_tide(self, id, search_by = Enum.UMR):
-        if search_by == Enum.UMR:
+    def wait_until_contract_is_Loaded_into_tide(self, id, search_by = Identifiers.UMR):
+        if search_by == Identifiers.UMR:
             self.click_umr_filter_btn()
-        elif search_by == Enum.LCR:
+        elif search_by == Identifiers.LCR:
             self.click_ssr_filter_btn()       
         self.writeinSearchField(id)
         self.noDataFoundLocator = (By.XPATH,"//div[contains(text(),'No Data Found')]")
@@ -78,16 +72,15 @@ class ContratApiLogPage(Base):
             self.driver.refresh()
             Espera.wait_mask_loading(self.driver)
             Espera.wait_seconds(5)
-            if search_by == Enum.UMR:
+            if search_by == Identifiers.UMR:
                 self.click_umr_filter_btn()
-            elif search_by == Enum.LCR:
+            elif search_by == Identifiers.LCR:
                 self.click_ssr_filter_btn()       
             self.writeinSearchField(id)
             self.noDataFoundLocator = (By.XPATH,"//div[contains(text(),'No Data Found')]")
             self.contador = self.contador + 1
             if self.contador == 50 or utilidades.check_if_element_exist(self.noDataFoundLocator) == False:
                 Espera.wait_mask_loading(self.driver)
-                #Espera.wait_seconds(15)
                 break
 
 

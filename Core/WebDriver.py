@@ -20,7 +20,7 @@ class WebDriver:
 
 
         driver.maximize_window()
-        driver.get (url)
+        driver.get(url)
                 
         return driver
 

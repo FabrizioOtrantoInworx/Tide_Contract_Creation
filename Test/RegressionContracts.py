@@ -1,9 +1,9 @@
-from Pages.LoginPage import LoginPage
+from Pages.Shared.LoginPage import LoginPage
 from Pages.Contracts.ContractPage import ContractPage
-from Pages.HomePage import HomePage
+from Pages.Shared.HomePage import HomePage
 from Pages.Contracts.ContratApiLogPage import ContratApiLogPage
 from Core.WebDriver import WebDriver
-from Pages.Contracts.Enumerados.enum import Enum
+from Pages.Contracts.Enumerations.Identifiers import Identifiers
 import json
 import pytest
 from allure_commons.types import AttachmentType
@@ -25,14 +25,14 @@ def test_regression_contract_api_log_version_update_date_equal_current_data_time
                 happy_path('VersionUpdateDateEqualCurrentDataTimeTemplate.json')
         except Exception as ex:
                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
-                pytest.fail(str(ex), False)
+                pytest.fail(f"Test have failed. \n\n {ex}", False)
 
 @allure.title("Contract without umr")
 @allure.description_html("""<h4>This test is to verify that contract have errors on tide</h4>""")
 def test_regression_contrat_api_log_contract_wihout_umr(setup):
         try:
                 error_text = "E004: UMR missing from contract; CONTRACTUMRISEMPTY"
-                error_path('ContractWihoutUMRTemplate.json',error_text, Enum.LCR)
+                error_path('ContractWihoutUMRTemplate.json',error_text, Identifiers.LCR)
         except Exception as ex:
                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
                 pytest.fail(str(ex), False)
@@ -42,7 +42,7 @@ def test_regression_contrat_api_log_contract_wihout_umr(setup):
 def test_regression_contract_api_log_contract_wihout_lcr(setup):
         try:
                 error_text = "E003: LloydsContractRef missing from contract; CONTRACTLLOYDSCONTRACTREFISEMPTY; Contract with UMR"
-                error_path('ContractWihoutLCRTemplate.json', error_text, Enum.UMR)
+                error_path('ContractWihoutLCRTemplate.json', error_text, Identifiers.UMR)
         except Exception as ex:
                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
                 pytest.fail(str(ex), False)
@@ -79,7 +79,7 @@ def test_regression_contract_api_log_contract_type_name_and_migrated_flag_false(
 def test_regression_umr_repeated_with_existing_error(setup):
         try:
                 error_text = "L003: L003: Invalid DCOM Contract; Unable to load contract into TIDE.; Unable to load contract into TIDE."
-                error_path("UmrRepeatedWithExistingErrorTemplate.json", error_text,Enum.UMR)
+                error_path("UmrRepeatedWithExistingErrorTemplate.json", error_text,Identifiers.UMR)
         except Exception as ex:
                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
                 pytest.fail(str(ex), False)
@@ -89,7 +89,7 @@ def test_regression_umr_repeated_with_existing_error(setup):
 def test_regression_contract_api_log_contrac_wWithout_contract_currency(setup):
         try:
                 error_text = "L003: Invalid DCOM Contract; Unable to load contract into TIDE."
-                error_path("ContractWithoutContractCurrencyTemplate.json", error_text,Enum.UMR)
+                error_path("ContractWithoutContractCurrencyTemplate.json", error_text,Identifiers.UMR)
         except Exception as ex:
                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
                 pytest.fail(str(ex), False)
@@ -135,12 +135,12 @@ def happy_path(file):
         contractPage.click_contract_api_log_btn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        contratApiLogPage.wait_until_contract_is_Loaded_into_tide(umr, Enum.UMR)
+        contratApiLogPage.wait_until_contract_is_Loaded_into_tide(umr, Identifiers.UMR)
         contratApiLogPage.click_check_btn(umr)
         contratApiLogPage.click_filter_btn()
         assert contratApiLogPage.read_status() =="-"
 
-def error_path(file, error, search_by = Enum.UMR ):
+def error_path(file, error, search_by = Identifiers.UMR ):
         t = open("./Data/SendJson/Templates/"+ file)
         dataTemplate = json.load (t)
         umr = dataTemplate['UMR']
@@ -153,11 +153,11 @@ def error_path(file, error, search_by = Enum.UMR ):
         contractPage.click_contract_api_log_btn()
 
         contratApiLogPage = ContratApiLogPage(driver)
-        if search_by == Enum.UMR:
-                contratApiLogPage.wait_until_contract_is_Loaded_into_tide(umr, Enum.UMR)
+        if search_by == Identifiers.UMR:
+                contratApiLogPage.wait_until_contract_is_Loaded_into_tide(umr, Identifiers.UMR)
                 contratApiLogPage.click_check_btn(umr)
-        elif search_by == Enum.LCR:
-                contratApiLogPage.wait_until_contract_is_Loaded_into_tide(lcr, Enum.LCR)
+        elif search_by == Identifiers.LCR:
+                contratApiLogPage.wait_until_contract_is_Loaded_into_tide(lcr, Identifiers.LCR)
                 contratApiLogPage.click_check_btn(lcr)
         contratApiLogPage.click_filter_btn()
         contratApiLogPage.click_review_errors_btn()

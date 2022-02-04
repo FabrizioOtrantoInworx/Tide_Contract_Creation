@@ -13,12 +13,15 @@ def test_past_version_update():
         umr_code = Utilidades.create_umr_code()
         lcr_code =  Utilidades.create_source_system_reference_code()
         r = send_valid_json("PastVersionUpdateTemplate.json", data_time, "", umr_code, lcr_code)
-        assert r.status_code == 400
-        assert r.reason == "Bad Request"
+        expected_status_code = 400
+        expectead_reason = "Bad Request"
+        expected_text = " within the file PastVersionUpdateTemplate.json does not lie in the date range"
+        assert r.status_code == expected_status_code
+        assert r.reason == expectead_reason
         data_time_cutted = data_time[0:19]
-        assert data_time_cutted + " within the file PastVersionUpdateTemplate.json does not lie in the date range" in r.text
+        assert data_time_cutted + expected_text in r.text
     except Exception as ex:
-        pytest.fail(f"status: {r.status_code} \n reason: {r.reason} \n message: {r.text}", False)    
+        pytest.fail(f"Test have failed.\n\n Status code:\n Expected: {expected_status_code} \n Actual: {r.status_code} \n\n Reason\n expected: {expectead_reason} \n actual: {r.reason} \n\n Text\n {r.text} \n\n excepcion: {ex}", False)    
 
 @allure.title("Future version Update Date")
 @allure.description_html("""<h4>This test is to verify that the contract is not being sent when 'version update' is set to a future date</h4>""")

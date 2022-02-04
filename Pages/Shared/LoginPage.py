@@ -15,7 +15,7 @@ class LoginPage(Base):
 
     def click_next(self):
         nextBtn = (By.ID,"idSIButton9")
-        Espera.wait_seconds(2)
+        #Espera.wait_seconds(2)
         self.click(nextBtn)
     
     def write_password(self, password):

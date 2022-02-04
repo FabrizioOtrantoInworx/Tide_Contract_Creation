@@ -27,9 +27,15 @@ class Espera:
             print("Timed out waiting for element to disappear")
 
     @staticmethod
+    def wait_mask_loading_drpdown(driver):
+        loadingMask = (By.XPATH,"//span[@class='k-icon k-i-loading']")
+        Espera.wait_for_element_to_dissapear(driver, loadingMask)
+
+    @staticmethod
     def wait_mask_loading(driver):
         loadingMask = (By.ID,"loading-bar-spinner")
         Espera.wait_for_element_to_dissapear(driver, loadingMask)
+
 
     @staticmethod
     def wait_seconds(seconds):

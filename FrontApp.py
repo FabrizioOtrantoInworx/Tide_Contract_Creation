@@ -43,6 +43,11 @@ class FrontApp:
         self.urlInput.insert(0,"https://beta.tideapp.co.uk/")
         self.urlInput.grid(row=5, column=3)
 
+        self.umr_Label = tk.Label(self.root, text="UMR", padx=20, pady=5)
+        self.umr_Label.grid(row=5, column=1)
+        self.umr_Label = tk.Entry(self.root)
+        self.umr_Label.grid(row=5, column=3)
+
 
         self.setChanges = tk.Button(self.root, text="Set Changes", command = self.set_new_app_config, width=15, height=1)
         self.setChanges.grid(row=6, column=3)
@@ -70,5 +75,15 @@ class FrontApp:
         writableFile.write(appConfig)
         writableFile.close()
         appConfigData.close()
+
+        contractonConfigData = open("./Data/Contracts/Contract_template.json")
+        contractConfig = json.load(contractonConfigData)
+        umr = self.umr_Label.get()
+        contractConfig['contract']['umr'] = umr
+        contractConfig = json.dumps(contractConfig)
+        write_contract_config = open("./Data/Contracts/Contract_template.json",'w')
+        write_contract_config.write(contractConfig)
+        write_contract_config.close()
+        write_contract_config.close()
 
 main()

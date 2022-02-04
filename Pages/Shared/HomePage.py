@@ -1,4 +1,4 @@
-from Pages.Navbar import NavBar
+from Pages.Shared.Navbar import NavBar
 from Core.Base import Base
 from Core.Espera import Espera
 

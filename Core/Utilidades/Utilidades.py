@@ -5,6 +5,9 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
 class Utilidades(Base):
 
     def __init__(self, driver):
@@ -24,11 +27,13 @@ class Utilidades(Base):
         NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
         return NVUD
 
-
-
     def check_if_element_exist(self, locator):
         try:
             self.element = WebDriverWait(self.driver,10).until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             return False
         return True
+
+
+
+        
