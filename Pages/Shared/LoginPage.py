@@ -27,8 +27,13 @@ class LoginPage(Base):
         self.write_email(username) 
         self.click_next()
         password = Configuration.set_password()
-        self.write_password(password)
+        Espera.wait_for_url_to_contain(self.driver, "ctcplc")
+        if "ctcplc" in self.driver.current_url:
+            passwordField = (By.ID, "passwordInput")
+            self.sendkeys(passwordField, password)
+            iniciar_sesion_btn = (By.ID, "submitButton")
+            self.click(iniciar_sesion_btn)
+        else:
+            self.write_password(password)
+            self.click_next()
         self.click_next()
-        self.click_next()
-
-

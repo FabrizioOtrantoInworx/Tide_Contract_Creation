@@ -39,20 +39,19 @@ class FrontApp:
 
         self.urlLabel = tk.Label(self.root, text="URL", padx=20, pady=5)
         self.urlLabel.grid(row=5, column=1)
-        self.urlInput = tk.Entry(self.root)
-        self.urlInput.insert(0,"https://beta.tideapp.co.uk/")
+        self.urlInput = ttk.Combobox(self.root, values = ["INT", "BETA"])
         self.urlInput.grid(row=5, column=3)
 
         self.umr_Label = tk.Label(self.root, text="UMR", padx=20, pady=5)
-        self.umr_Label.grid(row=5, column=1)
+        self.umr_Label.grid(row=6, column=1)
         self.umr_Label = tk.Entry(self.root)
-        self.umr_Label.grid(row=5, column=3)
+        self.umr_Label.grid(row=6, column=3)
 
 
         self.setChanges = tk.Button(self.root, text="Set Changes", command = self.set_new_app_config, width=15, height=1)
-        self.setChanges.grid(row=6, column=3)
+        self.setChanges.grid(row=7, column=3)
         self.stratTest = tk.Button(self.root, text="Start", command = self.root.destroy , width=15, height=1)
-        self.stratTest.grid(row=7, column=3)
+        self.stratTest.grid(row=8, column=3)
 
         self.root.mainloop()
 
@@ -64,12 +63,11 @@ class FrontApp:
         password = self.passwordInput.get()
         browser = self.browserCmb.get()
         driverRoute = self.routeDriverInput.get()
-        url = self.urlInput.get()
         appConfig["username"] = username
         appConfig["password"] = password
         appConfig["browser"] = browser
         appConfig["rutaDriver"] = driverRoute
-        appConfig["url"] = url
+        appConfig["url"] = self.set_enviroment()
         appConfig = json.dumps(appConfig)
         writableFile = open('./Data/Appconfig.json','w')
         writableFile.write(appConfig)
@@ -85,5 +83,12 @@ class FrontApp:
         write_contract_config.write(contractConfig)
         write_contract_config.close()
         write_contract_config.close()
+
+
+    def set_enviroment(self):
+        if self.urlInput.get() == "INT":
+            return "https://dasats.int.ctinsuretech.com/"
+        elif self.urlInput.get() == "BETA":
+            return "https://beta.tideapp.co.uk/"
 
 main()

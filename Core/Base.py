@@ -1,3 +1,4 @@
+from ssl import Options
 from time import sleep
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -32,7 +33,8 @@ class Base:
         inputField.send_keys(text)
         Espera.wait_mask_loading_drpdown(self.driver)
         Espera.wait_seconds(1)
-        firstOption = self.driver.find_element(By.XPATH,"//kendo-list/div/ul/li[1]")
+        options = self.driver.find_elements(By.XPATH,"//kendo-list/div/ul/li")
+        firstOption = options[0]
         firstOption.click()
 
         

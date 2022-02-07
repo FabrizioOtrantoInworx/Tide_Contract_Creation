@@ -94,6 +94,7 @@ def test_regression_contract_api_log_version_update_date_equal_current_data_time
             risk_code_page.click_save_btn()
 
             contract_navbar_page.click_reporting_channels_tab()
+
             reporting_channel_page = ReportingChannelsPage(driver)
             reporting_channel_page.click_add_reporting_channel()
             reporting_channel_page.select_type(dataTemplate['reporting_channel']['type'])

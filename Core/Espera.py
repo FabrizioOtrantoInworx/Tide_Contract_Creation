@@ -15,7 +15,7 @@ class Espera:
     @staticmethod
     def wait_for_url_to_contain(driver, url):
             try:
-                WebDriverWait(driver, 30).until(EC.url_contains(url),f"timeout has been exceeded then url was different from {url}")
+                WebDriverWait(driver, 10).until(EC.url_contains(url),f"timeout has been exceeded then url was different from {url}")
             except TimeoutException:
                 print("Timed out waiting for url to be")
 
