@@ -24,15 +24,14 @@ def setup():
     yield
     driver.close()
 
-<<<<<<< HEAD
-# @allure.title("Current Version Update Date")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_version_update_date_equal_current_data_time(setup):
-#         try:
-#                 happy_path('VersionUpdateDateEqualCurrentDataTimeTemplate.json')
-#         except Exception as ex:
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-#                 pytest.fail(f"Test have failed. \n\n {ex}", False)
+@allure.title("Current Version Update Date")
+@allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
+def test_regression_contract_api_log_version_update_date_equal_current_data_time(setup):
+        try:
+                happy_path('VersionUpdateDateEqualCurrentDataTimeTemplate.json')
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(f"Test have failed. \n\n {ex}", False)
 
 @allure.title("Contract without umr")
 @allure.description_html("""<h4>This test is to verify that contract have errors on tide</h4>""")
@@ -43,171 +42,105 @@ def test_regression_contrat_api_log_contract_wihout_umr(setup):
         except Exception as ex:
                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
                 pytest.fail(str(ex), False)
-=======
-@allure.title("Current Version Update Date")
+
+@allure.title("Contract without lcr")
 @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-def test_regression_contract_api_log_version_update_date_equal_current_data_time(setup):
+def test_regression_contract_api_log_contract_wihout_lcr(setup):
         try:
-                happy_path('VersionUpdateDateEqualCurrentDataTimeTemplate.json', "name")
+                error_text = "E003: LloydsContractRef missing from contract; CONTRACTLLOYDSCONTRACTREFISEMPTY; Contract with UMR"
+                error_path('ContractWihoutLCRTemplate.json', error_text, Identifiers.UMR)
         except Exception as ex:
-                allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
-                pytest.fail(f"Test have failed. \n\n {ex}", False)
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
-# @allure.title("Contract without umr")
-# @allure.description_html("""<h4>This test is to verify that contract have errors on tide</h4>""")
-# def test_regression_contrat_api_log_contract_wihout_umr(setup):
-#         try:
-#                 error_text = "E004: UMR missing from contract; CONTRACTUMRISEMPTY"
-#                 error_path('ContractWihoutUMRTemplate.json',error_text, Identifiers.LCR)
-#         except Exception as ex:
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
-#                 pytest.fail(str(ex), False)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
+@allure.title("ContractStatusName equal to active & contractTypeName equal to Binding Authority Agreement")
+@allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
+def test_regression_contract_api_log_Contract_status_Name_and_contract_type_name(setup):
+        try:
+                happy_path('ContractStatusNameAndContractTypeNameTemplate.json')
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
-# @allure.title("Contract without lcr")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_contract_wihout_lcr(setup):
-#         try:
-#                 error_text = "E003: LloydsContractRef missing from contract; CONTRACTLLOYDSCONTRACTREFISEMPTY; Contract with UMR"
-#                 error_path('ContractWihoutLCRTemplate.json', error_text, Identifiers.UMR)
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
+@allure.title("ContractTypeName equal to Twin Contract & missing TestMigratedFlag")
+@allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
+def test_regression_contract_api_log_contract_type_name_and_migrated_flag_missing(setup):
+        try:
+                happy_path('ContractTypeNameAndMigratedFlagMissingTemplate.json')
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
-# @allure.title("ContractStatusName equal to active & contractTypeName equal to Binding Authority Agreement")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_Contract_status_Name_and_contract_type_name(setup):
-#         try:
-#                 happy_path('ContractStatusNameAndContractTypeNameTemplate.json')
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
+@allure.title("ContractTypeName is equal to Service Company Agreement & migratedFlag is False")
+@allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
+def test_regression_contract_api_log_contract_type_name_and_migrated_flag_false(setup):
+        try:
+                happy_path("ContractTypeNameAndMigratedFlagFalseTemplate.json")
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
-# @allure.title("ContractTypeName equal to Twin Contract & missing TestMigratedFlag")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_contract_type_name_and_migrated_flag_missing(setup):
-#         try:
-#                 happy_path('ContractTypeNameAndMigratedFlagMissingTemplate.json')
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
+@allure.title("Umr is repeated and it has preveious error")
+@allure.description_html("""<h4>This test is to verify that contract have errors on tide</h4>""")
+def test_regression_umr_repeated_with_existing_error(setup):
+        try:
+                error_text = "L003: L003: Invalid DCOM Contract; Unable to load contract into TIDE.; Unable to load contract into TIDE."
+                error_path("UmrRepeatedWithExistingErrorTemplate.json", error_text,Identifiers.UMR)
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
-# @allure.title("ContractTypeName is equal to Service Company Agreement & migratedFlag is False")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_contract_type_name_and_migrated_flag_false(setup):
-#         try:
-#                 happy_path("ContractTypeNameAndMigratedFlagFalseTemplate.json")
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
-
-# @allure.title("Umr is repeated and it has preveious error")
-# @allure.description_html("""<h4>This test is to verify that contract have errors on tide</h4>""")
-# def test_regression_umr_repeated_with_existing_error(setup):
-#         try:
-#                 error_text = "L003: L003: Invalid DCOM Contract; Unable to load contract into TIDE.; Unable to load contract into TIDE."
-#                 error_path("UmrRepeatedWithExistingErrorTemplate.json", error_text,Identifiers.UMR)
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
-
-# @allure.title("Contract with invalid currency")
-# @allure.description_html("""<h4>This test is to verify that a contract with invalid currencies is processed with errors on tide</h4>""")
-# def test_regression_contract_api_log_contrac_With_invalid_Currency(setup):
-#         try:
-#                 error_text = "[Currency] supplied cannot be matched to a valid Tide value."
-#                 error_path("InvalidCurrencyTemplate.json", error_text,Identifiers.UMR)
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
+@allure.title("Contract with invalid currency")
+@allure.description_html("""<h4>This test is to verify that a contract with invalid currencies is processed with errors on tide</h4>""")
+def test_regression_contract_api_log_contrac_With_invalid_Currency(setup):
+        try:
+                error_text = "[Currency] supplied cannot be matched to a valid Tide value."
+                error_path("InvalidCurrencyTemplate.json", error_text,Identifiers.UMR)
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
 
-# @allure.title("Contract without contract currency")
-# @allure.description_html("""<h4>This test is to verify that contract have errors on tide</h4>""")
-# def test_regression_contract_api_log_contrac_Without_contract_currency(setup):
-#         try:
-#                 error_text = "L003: Invalid DCOM Contract; Unable to load contract into TIDE."
-<<<<<<< HEAD
-#                 error_path("ContractWithoutContractCurrencyTemplate.json", error_text, Identifiers.UMR)
-#         except Exception as ex:
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 error_path("ContractWithoutContractCurrencyTemplate.json", error_text,Identifiers.UMR)
-#         except Exception as ex:
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
+@allure.title("Contract without contract currency")
+@allure.description_html("""<h4>This test is to verify that contract have errors on tide</h4>""")
+def test_regression_contract_api_log_contrac_Without_contract_currency(setup):
+        try:
+                error_text = "L003: Invalid DCOM Contract; Unable to load contract into TIDE."
+                error_path("ContractWithoutContractCurrencyTemplate.json", error_text, Identifiers.UMR)
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
-# @allure.title("ContractStatusName is equal to Registered")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_contract_status_name_equal_registered(setup):
-#         try:
-#                 happy_path("ContractStatusNameEqualRegisteredTemplate.json")
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
+@allure.title("ContractStatusName is equal to Registered")
+@allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
+def test_regression_contract_api_log_contract_status_name_equal_registered(setup):
+        try:
+                happy_path("ContractStatusNameEqualRegisteredTemplate.json")
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
 
-# @allure.title("MigratedFlag True & IsMigratedDraft True")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_migrated_flag_true_and_is_migrated_draft_true(setup):
-#         try:
-#               happy_path("MigratedFlagTrueAndIsMigratedDraftTrueTemplate.json")
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
-#                 pytest.fail(str(ex), False)
+@allure.title("MigratedFlag True & IsMigratedDraft True")
+@allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
+def test_regression_contract_api_log_migrated_flag_true_and_is_migrated_draft_true(setup):
+        try:
+              happy_path("MigratedFlagTrueAndIsMigratedDraftTrueTemplate.json")
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
-# @allure.title("Umr & lcr are equal")
-# @allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
-# def test_regression_contract_api_log_contract_with_same_umr_and_lcr(setup):
-#         try:
-#                 happy_path('ContractWithSameUmrAndLcrTemplate.json')
-#         except Exception as ex:
-<<<<<<< HEAD
-#                 allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
-#                 pytest.fail(str(ex), False)
+@allure.title("Umr & lcr are equal")
+@allure.description_html("""<h4>This test is to verify that contract does not have errors on tide</h4>""")
+def test_regression_contract_api_log_contract_with_same_umr_and_lcr(setup):
+        try:
+                happy_path('ContractWithSameUmrAndLcrTemplate.json')
+        except Exception as ex:
+                allure.attach(driver.get_screenshot_as_png(), name="failed_screenshot", attachment_type=AttachmentType.PNG)
+                pytest.fail(str(ex), False)
 
 
 def happy_path(file):
-=======
-#                 allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
-#                 pytest.fail(str(ex), False)
-
-
-def happy_path(file, screenshot_name):
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
         t = open("./Data/SendJson/Templates/"+ Configuration.set_envirnment() + "/" + file)
         dataTemplate = json.load (t)
         umr = dataTemplate['UMR']
@@ -223,18 +156,11 @@ def happy_path(file, screenshot_name):
         contratApiLogPage.click_check_btn(umr)
         contratApiLogPage.click_filter_btn()
         assert contratApiLogPage.read_status() =="-"
-<<<<<<< HEAD
         allure.attach(driver.get_screenshot_as_png(), name="success_screenshot", attachment_type=AttachmentType.PNG)
         
 
 
 def error_path(file, error ,search_by = Identifiers.UMR):
-=======
-        allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=AttachmentType.PNG)
-
-
-def error_path(file, error,screenshot_name ,search_by = Identifiers.UMR):
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
         t = open("./Data/SendJson/Templates/" + Configuration.set_envirnment() + "/" + file)
         dataTemplate = json.load (t)
         umr = dataTemplate['UMR']
@@ -256,16 +182,9 @@ def error_path(file, error,screenshot_name ,search_by = Identifiers.UMR):
         contratApiLogPage.click_filter_btn()
         contratApiLogPage.click_review_errors_btn()
         assert error in contratApiLogPage.read_errors(0)
-<<<<<<< HEAD
         allure.attach(driver.get_screenshot_as_png(), name="success_screenshot", attachment_type=AttachmentType.PNG)
         contratApiLogPage.click_ok_btn()
 
-
-=======
-        allure.attach(driver.get_screenshot_as_png, name="screenshot", attachment_type=AttachmentType.PNG)
-        contratApiLogPage.click_ok_btn()
-
->>>>>>> 4a20f202f433e71e59b06e8b54ff63114e76999a
         
 
 
