@@ -1,2 +1,2 @@
-cd C:/PythonAutomation/Scripts
+cd C:\TideAutomation\TIDE\PythonAutomation
 allure serve reports

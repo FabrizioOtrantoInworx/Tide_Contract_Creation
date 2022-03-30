@@ -1,1 +1,1 @@
-{"browser": "chrome", "url": "https://beta.tideapp.co.uk/", "rutaDriver": "C:/PythonAutomation/", "username": "dev.admin@tideapp.co.uk", "password": "WdFV%.2431", "login_method": "Microsoft"}
+{"browser": "chrome", "environment": "DEV", "url": "https://lt-d-tde-01-wa-01.azurewebsites.net/home", "rutaDriver": "C:/PythonAutomation/", "beta_username": "dev.admin@tideapp.co.uk", "beta_password": "WdFV%.2431", "dev_username": "development.tideadmin@ctinsuretech.com", "dev_password": "+3k*!S4;=-%5v5|V", "int_username": "", "int_password": "", "login_method": "Microsoft"}

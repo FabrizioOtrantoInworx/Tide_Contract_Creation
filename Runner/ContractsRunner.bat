@@ -1,3 +1,3 @@
-cd C:/PythonAutomation/Scripts
-python -m py.test --alluredir=reports Test/RegressionContracts.py -n 4
+cd C:\TideAutomation\TIDE\PythonAutomation
+python -m py.test --alluredir=reports Test/RegressionContracts.py -n 6
  

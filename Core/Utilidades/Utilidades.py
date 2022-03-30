@@ -24,8 +24,7 @@ class Utilidades(Base):
     def set_current_data_time():
         utc_now = datetime.datetime.utcnow()
         utc_now_fixed = utc_now - datetime.timedelta(seconds=10)
-        NVUD = utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
-        return NVUD
+        return utc_now_fixed.strftime('%Y-%m-%dT%H:%M:%S.000Z')
 
     def check_if_element_exist(self, locator):
         try:

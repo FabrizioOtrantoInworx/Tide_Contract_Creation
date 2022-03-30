@@ -1,5 +1,6 @@
 import json
 import requests
+from Core.Configuration import Configuration
 from Core.Utilidades.Utilidades import Utilidades
 import Data.SendJson.Properties as Properties
 import pytest
@@ -99,8 +100,8 @@ def test_contract_type_name_without_contract_section_status():
 def test_repeated_umr_and_lcr():
     try:
         data_time = Utilidades.set_current_data_time()
-        umr_code = "UMRAlreadyExisting"
-        lcr_code =  "LCRAlreadyExisting"
+        umr_code = "UMRAlreadyExists"
+        lcr_code =  "LCRAlreadyExists"
         r = send_valid_json("RepeatedUmrAndLcrTemplate.json",data_time, "TestSiete",umr_code,lcr_code)
         assert r.status_code == 200
         assert r.reason == "OK"
@@ -169,9 +170,9 @@ def test_migrated_flag_true_and_is_migrated_draft_false():
 def test_umr_repeated_with_existingError():
     try:
         data_time = Utilidades.set_current_data_time()
-        umr_code = "ANOTHERNEWUMRE66070"
+        umr_code = "TestDoceAlreadyExistingErrors"
         lcr_code = Utilidades.create_source_system_reference_code()
-        r = send_valid_json("UmrRepeatedWithExistingErrorTemplate.json", data_time, "TestDoce", umr_code, lcr_code)
+        r = send_valid_json("UmrRepeatedWithExistingErrorTemplate.json", data_time, "", umr_code, lcr_code)
         assert r.status_code == 200
         assert r.reason == "OK"
         assert "UmrRepeatedWithExistingErrorTemplate.json was successfully uploaded" in r.text
@@ -255,9 +256,6 @@ def test_contract_with_same_umr_and_lcr():
     try:
         data_time = Utilidades.set_current_data_time()
         umr_code_and_lcr_code = Utilidades.create_umr_code()
-        data_time = Utilidades.set_current_data_time()
-        umr_code = Utilidades.create_umr_code()
-        lcr_code =  Utilidades.create_source_system_reference_code()
         r = send_valid_json("ContractWithSameUmrAndLcrTemplate.json",data_time, "TestDiecinueve", umr_code_and_lcr_code, umr_code_and_lcr_code)
         assert r.status_code == 200
         assert r.reason == "OK"
@@ -265,18 +263,20 @@ def test_contract_with_same_umr_and_lcr():
     except Exception as ex:
         pytest.fail(f"status: {r.status_code} \n reason: {r.reason} \n message: {r.text}", False)
 
+
+
 def send_valid_json(file, data_time, id, umr_code,  lcr_code):
-            t = open("./Data/SendJson/Templates/" + file)
+            t = open("./Data/SendJson/Templates/" + Configuration.set_envirnment() + "/"+ file)
             data_template = json.load(t)
             data_template['LloydsContractRef'] = id + lcr_code
             data_template['UMR'] = id + umr_code
             data_template['VersionUpdatedDate'] = data_time
             data = json.dumps(data_template)
-            writable_file = open("./Data/SendJson/Templates/" + file,'w')
+            writable_file = open("./Data/SendJson/Templates/" + Configuration.set_envirnment() + "/" + file,'w')
             writable_file.write(data)
             writable_file.close()
             t.close()
-            url = Properties.Url
-            headers = Properties.Header
-            r =  requests.post(url, files={'file': open("./Data/SendJson/Templates/"+ file, 'rb')},headers=headers) 
+            url = Configuration.set_url_for_json(Configuration.set_envirnment())
+            headers = Configuration.set_header_for_json(Configuration.set_envirnment())
+            r =  requests.post(url, files={'file': open("./Data/SendJson/Templates/" + Configuration.set_envirnment() + "/" + file, 'rb')},headers=headers) 
             return r

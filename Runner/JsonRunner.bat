@@ -1,2 +1,2 @@
-cd C:/PythonAutomation/Scripts
-python -m py.test --alluredir=reports Test/SendJson.py -n 1
+cd C:\TideAutomation\TIDE\PythonAutomation
+python -m py.test --alluredir=reports Test/SendJson.py -n 18
