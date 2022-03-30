@@ -1,0 +1,39 @@
+{
+    "contract": {
+        "folder_type": "Binder",
+        "division": "Test Broker 01 - Test Broker 01 - Division 01",
+        "umr": "USDUSD",
+        "currency": "USD",
+        "inception_date": "01012020",
+        "expiry_date": "31122020",
+        "settlement_currency": "USD",
+        "broker": "Antares Managing Agency Limited - AUL 6091"
+    },
+    "coverholder": {
+        "coverholder": "Aon UK Limited Reinsurance - 111680VGU"
+    },
+    "section": {
+        "section_reference": "A",
+        "section_description": "A",
+        "brokerage": "5",
+        "coverholder_commission": "5",
+        "additional_deduction": "3",
+        "class_bussiness": "At_aa",
+        "risk_ratting": "High",
+        "section_Ccurrency": "USD",
+        "section_maximum_limit_liability": "2"
+    },
+    "insurer": {
+        "insurer": "Arch Underwriting at Lloyd's Ltd - 2012",
+        "written_line": "100",
+        "estimated_signed_line": "100"
+    },
+    "risk_code": {
+        "risk_code": "8T - OVERSEAS LEG TERRORISM TRANSPORT",
+        "split_porcentage": "100"
+    },
+    "reporting_channel": {
+        "type": "Risk",
+        "frequency": "Monthly"
+    }
+}
